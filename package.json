@@ -48,6 +48,7 @@
     "babel-polyfill": "6.1.4",
     "babel-runtime": "6.0.14",
     "invariant": "^2.1.1",
+    "node-uuid": "^1.4.7",
     "object-pick": "^0.1.1",
     "pouchdb": "^5.1.0",
     "pouchdb-authentication": "^0.4.2",
