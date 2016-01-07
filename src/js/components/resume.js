@@ -10,7 +10,9 @@ class Resume extends Component {
 
         this.handleLogout = this.handleLogout.bind(this);
         this.history = this.props.history;
+
         this.db = props.db;
+        this.localDb = props.localDb;
     }
 
     render() {
@@ -18,6 +20,7 @@ class Resume extends Component {
             <div>
                 <h2>{this.state.text}</h2>
                 <button onClick={this.handleLogout}>Logout</button>
+                {React.cloneElement(this.props.children, { store:this.props.store, localDb: this.localDb, restaurantsDb: this.props.restaurantsDb, productsDb: this.props.productsDb })}
             </div>
         );
     }

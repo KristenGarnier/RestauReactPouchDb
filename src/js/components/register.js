@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
-import config from '../../config/config';
+import config from '../../../config/config';
 
 class Register extends Component {
     constructor(props) {
