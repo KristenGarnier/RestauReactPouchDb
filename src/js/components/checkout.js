@@ -1,10 +1,15 @@
 import React, {Component} from 'react';
+import {reset, deleteSupplement} from '../actions';
+import TableRow from './tableRow';
 
 class Checkout extends Component {
     constructor(props) {
         super(props);
 
         this.componentDidMount = this.componentDidMount.bind(this);
+        this.handleCheckout = this.handleCheckout.bind(this);
+        this.handleAction = this.handleAction.bind(this);
+
         const store = this.props.store.getState();
         this.state = {
             principal: store['principal'] || {},
@@ -43,8 +48,6 @@ class Checkout extends Component {
         }
         else if (drink === undefined || null) {
             this.push('/resume/drink');
-        } else if (supplements === undefined || null){
-            this.push('/resume/supplement');
         }
     }
 
@@ -56,11 +59,7 @@ class Checkout extends Component {
         let total = this.state.principal.price + this.state.drink.price;
         const supplements = this.state.supplements.map((supp, i) => {
             total += supp.price;
-            return <tr key={i}>
-                <td>{supp.name}</td>
-                <td>Produit supplémentaire</td>
-                <td>{supp.price}</td>
-            </tr>;
+            return <TableRow element={supp} key={i} click={this.handleAction} />;
         });
 
         return <div>
@@ -70,6 +69,7 @@ class Checkout extends Component {
                     <th>Produit</th>
                     <th>type</th>
                     <th>prix</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -77,19 +77,44 @@ class Checkout extends Component {
                     <td>{this.state.principal.name}</td>
                     <td>Element Principal</td>
                     <td>{this.state.principal.price}</td>
+                    <td><button onClick={() => this.handleAction('MODIFY_PRINCIPAL')}>Modifer</button></td>
                 </tr>
                 <tr>
                     <td>{this.state.drink.name}</td>
                     <td>Boisson</td>
                     <td>{this.state.drink.price}</td>
+                    <td><button onClick={() => this.handleAction('MODIFY_DRINK')}>Modifier</button></td>
                 </tr>
                 {supplements}
                 </tbody>
             </table>
             <div>
                 <h3>TOTAL : {total} €</h3>
+                <button className="button-primary" onClick={this.handleCheckout}>Commander</button>
             </div>
         </div>;
+    }
+
+    handleCheckout(){
+        this.props.history.push('/');
+        this.props.store.dispatch(reset());
+    }
+
+    handleAction(action, supplement){
+        switch(action){
+            case 'DELETE':
+                this.props.store.dispatch(deleteSupplement(supplement));
+                break;
+            case 'MODIFY_PRINCIPAL':
+                this.push('/resume/product');
+                break;
+            case 'MODIFY_DRINK':
+                this.push('/resume/drink');
+                break;
+            default:
+                console.error('Wrong action sent to handleAction');
+                break;
+        }
     }
 }
 

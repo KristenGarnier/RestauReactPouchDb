@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
 import {reset} from '../actions';
+import Circular from 'circular-json';
+
 
 class Resume extends Component {
     constructor(props) {
         super(props);
 
+        console.log(Circular.parse(localStorage.getItem('user')));
         this.state = {
-            text: 'hello'
+            text: Circular.parse(localStorage.getItem('user')).name
         };
 
         this.handleLogout = this.handleLogout.bind(this);
@@ -19,16 +22,30 @@ class Resume extends Component {
     render() {
         return (
             <div>
-                <h2>{this.state.text}</h2>
-                <button onClick={this.handleLogout}>Logout</button>
+                <div className="row">
+                    <div className="four columns">
+                        <h2 className="title">Manger</h2>
+                    </div>
+                    <div className="four columns">
+                        <p className="user">Utilisateur : {this.state.text}</p>
+                    </div>
+                    <div className="four columns">
+                        <button className="logout" onClick={this.handleLogout}>Logout</button>
+                    </div>
+                </div>
                 <div className="container">
-                {React.cloneElement(this.props.children, { store:this.props.store, localDb: this.localDb, restaurantsDb: this.props.restaurantsDb, productsDb: this.props.productsDb })}
+                    {React.cloneElement(this.props.children, {
+                        store: this.props.store,
+                        localDb: this.localDb,
+                        restaurantsDb: this.props.restaurantsDb,
+                        productsDb: this.props.productsDb
+                    })}
                 </div>
             </div>
         );
     }
 
-    handleLogout(){
+    handleLogout() {
         this.db.logout()
             .then(res => {
                 localStorage.removeItem('user');

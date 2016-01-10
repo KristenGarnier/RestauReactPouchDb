@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
+import Circular from 'circular-json';
 
 class Login extends Component {
     constructor(props) {
@@ -18,22 +19,32 @@ class Login extends Component {
         this.history = this.props.history;
     }
 
-    componentDidMount(){
-        if(localStorage.getItem('user')){
+    componentDidMount() {
+        if (localStorage.getItem('user')) {
             this.history.push('/resume');
         }
     }
 
     render() {
         return (
-            <div>
-                <input type="text" onChange={this.handleLoginChange} value={this.state.login} placeholder="Username"
-                       required/>
-                <input type="text" onChange={this.handlePasswordChange} value={this.state.password}
-                       placeholder="Password" required/>
-
-                <button onClick={this.handleClick}>Connect</button>
-                <Link to="register">Register</Link>
+            <div className="container form-connect">
+                <h2>Connectez vous</h2>
+                <div className="row">
+                    <div className="six columns">
+                        <label for="exampleEmailInput">Email</label>
+                        <input onChange={this.handleLoginChange} value={this.state.login} className="u-full-width"
+                               type="text" placeholder="email@domain.fr" id="exampleEmailInput"/>
+                    </div>
+                    <div className="six columns">
+                        <label for="password">Mot de passe</label>
+                        <input className="u-full-width" onChange={this.handlePasswordChange} value={this.state.password}
+                               type="password" placeholder="Mot de passe" id="password" required/>
+                    </div>
+                </div>
+                <div className="button-group">
+                    <button onClick={this.handleClick} className="button-primary">Se connecter</button>
+                    <Link to="register" className="u-pull-right button">S'inscrire</Link>
+                </div>
             </div>
         );
     }
@@ -58,7 +69,7 @@ class Login extends Component {
             })
             .then(res => {
                 console.log(`Welcome ${res.userCtx.name}`);
-                localStorage.setItem('user', res.userCtx);
+                localStorage.setItem('user', Circular.stringify(res.userCtx));
                 this.history.push('/resume');
             })
             .catch(error => {

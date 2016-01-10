@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
 import {instantiateRestaurant} from '../actions';
-import ListElem from './listElem';
+import UiElem from './uiElem';
 
 class Restaurants extends Component {
     constructor(props) {
@@ -38,12 +38,13 @@ class Restaurants extends Component {
 
     render() {
         const restaurants = this.state.restaurants.map(doc => {
-            return <ListElem click={this.handleClick} selected={this.state.state} key={doc.doc._id} element={doc.doc}/>;
+            return <UiElem click={this.handleClick} selected={this.state.state} key={doc.doc._id} element={doc.doc}/>;
         });
         return (<div>
-            <ul>
+            <h2>Choisissez votre restaurant</h2>
+            <div className="row">
                 {restaurants}
-            </ul>
+            </div>
         </div>);
     }
 

@@ -22,19 +22,29 @@ class Register extends Component {
 
     render() {
         return (
-            <div>
+            <div className="container form-connect">
                 <div>
                     <p style={{
                     color: 'red'
                     }}>{this.state.error.name}</p>
                 </div>
-                <input type="text" onChange={this.handleLoginChange} value={this.state.login} placeholder="Username"
-                       required/>
-                <input type="text" onChange={this.handlePasswordChange} value={this.state.password}
-                       placeholder="Password" required/>
-
-                <button onClick={this.handleClick}>Register</button>
-                <Link to="/">Connect</Link>
+                <h2>Inscription</h2>
+                <div className="row">
+                    <div className="six columns">
+                        <label for="exampleEmailInput">Email</label>
+                        <input onChange={this.handleLoginChange} value={this.state.login} className="u-full-width"
+                               type="text" placeholder="email@domain.fr" id="exampleEmailInput"/>
+                    </div>
+                    <div className="six columns">
+                        <label for="password">Mot de passe</label>
+                        <input className="u-full-width" onChange={this.handlePasswordChange} value={this.state.password}
+                               type="password" placeholder="Mot de passe" id="password" required/>
+                    </div>
+                </div>
+                <div className="button-group">
+                    <button onClick={this.handleClick} className="button-primary">S'inscrire</button>
+                    <Link to="/" className="u-pull-right button">Se connecter</Link>
+                </div>
             </div>
         );
     }
@@ -61,7 +71,7 @@ class Register extends Component {
                 })
                 .then(res => {
                     console.log(`Welcome ${res.userCtx.name}`);
-                    localStorage.setItem('user', res.userCtx);
+                    localStorage.setItem('user', Circular.stringify(res.userCtx));
                     this.history.push('/resume');
                 })
                 .catch(error => {
@@ -73,7 +83,7 @@ class Register extends Component {
             console.log('ERRR');
             this.setState({
                 error: {
-                    name: 'You are not authorized to register'
+                    name: 'Vous devez être étudiant en licence MMI au puy en velay pour pouvoir vous inscrire'
                 }
             });
         }

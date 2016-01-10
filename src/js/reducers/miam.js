@@ -45,6 +45,7 @@ export default (_ = [], action) => {
             saveState(state);
             return state;
         case 'INSTANTIATE_RESTAURANT':
+            state = {};
             state.restaurant = action.restaurant;
             saveState(state);
             return state;

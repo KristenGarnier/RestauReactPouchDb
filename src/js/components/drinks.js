@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {instantiateDrink} from '../actions';
-import ListElem from './listElem';
+import UiElem from './uiElem';
 
 class Drinks extends Component {
     constructor(props) {
@@ -65,12 +65,12 @@ class Drinks extends Component {
 
     render() {
         const produits = this.state.produits.map(doc => {
-            return <ListElem click={this.handleClick} selected={this.state.state} key={doc._id} element={doc}/>;
+            return <UiElem click={this.handleClick} selected={this.state.state} key={doc._id} element={doc}/>;
         });
         return (<div>
-            <ul>
+            <div className="row">
                 {produits}
-            </ul>
+            </div>
         </div>);
     }
 
