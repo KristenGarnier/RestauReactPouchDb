@@ -1,4 +1,11 @@
-let state = [];
+import Circular from 'circular-json';
+
+let state = localStorage.getItem('state') !== null && localStorage.getItem('state') !== '' ? Object.assign(Circular.parse(localStorage.getItem('state'))) : {};
+
+const saveState = (save) => {
+    localStorage.setItem('state', Circular.stringify(save));
+};
+
 export default (_ = [], action) => {
     console.log(action);
     switch (action.type) {
@@ -8,9 +15,10 @@ export default (_ = [], action) => {
             } else {
                 state.supplements = [
                     ...state.supplements,
-                    action.supplement
+                    Object.assign(action.supplement)
                 ];
             }
+            saveState(state);
             return state;
         case 'DELETE_SUPPLEMENT':
             let count = 0;
@@ -26,15 +34,23 @@ export default (_ = [], action) => {
                     return true
                 }
             });
+            saveState(state);
             return state;
         case 'INSTANTIATE_PRINCIPAL':
             state.principal = action.principal;
+            saveState(state);
             return state;
         case 'INSTANTIATE_DRINK':
             state.drink = action.drink;
+            saveState(state);
             return state;
         case 'INSTANTIATE_RESTAURANT':
             state.restaurant = action.restaurant;
+            saveState(state);
+            return state;
+        case 'RESET':
+            state = [];
+            localStorage.removeItem('state');
             return state;
         default:
             return state

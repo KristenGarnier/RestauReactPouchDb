@@ -53,13 +53,16 @@ class Checkout extends Component {
     }
 
     render() {
-        const supplements = this.state.supplements.map(supp => {
-            return <tr>
+        let total = this.state.principal.price + this.state.drink.price;
+        const supplements = this.state.supplements.map((supp, i) => {
+            total += supp.price;
+            return <tr key={i}>
                 <td>{supp.name}</td>
                 <td>Produit supplémentaire</td>
                 <td>{supp.price}</td>
             </tr>;
         });
+
         return <div>
             <table className="u-full-width">
                 <thead>
@@ -83,6 +86,9 @@ class Checkout extends Component {
                 {supplements}
                 </tbody>
             </table>
+            <div>
+                <h3>TOTAL : {total} €</h3>
+            </div>
         </div>;
     }
 }

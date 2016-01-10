@@ -32,3 +32,9 @@ export function instantiateRestaurant(restaurant){
         restaurant
     }
 }
+
+export function reset(){
+    return {
+        type: 'RESET'
+    }
+}
