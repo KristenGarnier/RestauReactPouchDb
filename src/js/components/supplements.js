@@ -85,7 +85,7 @@ class Supplements extends Component {
     }
 
     handleConfirm(){
-        alert('CONFIRMED !')
+        this.push('/resume/checkout');
     }
 
     delete(supplement){

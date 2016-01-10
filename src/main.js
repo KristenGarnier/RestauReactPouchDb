@@ -9,6 +9,7 @@ import Restaurants from './js/components/restaurants';
 import Principal from './js/components/principal';
 import Drink from './js/components/drinks';
 import Supp from './js/components/supplements';
+import Checkout from './js/components/checkout';
 
 const routes = (
     <Router history={browserHistory}>
@@ -19,6 +20,7 @@ const routes = (
                 <Route path="product" name="product" component={Principal}/>
                 <Route path="drink" name="drink" component={Drink}/>
                 <Route path="supplement" name="supplement" component={Supp}/>
+                <Route path="checkout" name="checkout" component={Checkout}/>
             </Route>
             <Route path="register" name="register" component={Register}/>
         </Route>
