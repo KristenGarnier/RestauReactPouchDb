@@ -60,7 +60,6 @@ class Principal extends Component {
 
     render() {
         const produits = this.state.produits.map(doc => {
-            console.log(doc);
             return <ListElem click={this.handleClick} selected={this.state.state} key={doc._id} element={doc}/>;
         });
         return (<div>

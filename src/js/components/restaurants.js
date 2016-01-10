@@ -37,7 +37,6 @@ class Restaurants extends Component {
     }
 
     render() {
-        console.log(this.state.state);
         const restaurants = this.state.restaurants.map(doc => {
             return <ListElem click={this.handleClick} selected={this.state.state} key={doc.doc._id} element={doc.doc}/>;
         });

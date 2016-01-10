@@ -5,10 +5,10 @@ export function addSupplement(supplement){
     }
 }
 
-export function deleteSupplement(index){
+export function deleteSupplement(supplement){
     return {
         type: 'DELETE_SUPPLEMENT',
-        index
+        supplement
     }
 }
 
