@@ -16,9 +16,9 @@ const routes = (
             <IndexRoute component={Login}/>
             <Route path="resume" name="resume" component={Resume}>
                 <IndexRoute component={Restaurants}/>
-                <Route path="product" component={Principal}/>
-                <Route path="drink" component={Drink}/>
-                <Route path="supplement" component={Supp}/>
+                <Route path="product" name="product" component={Principal}/>
+                <Route path="drink" name="drink" component={Drink}/>
+                <Route path="supplement" name="supplement" component={Supp}/>
             </Route>
             <Route path="register" name="register" component={Register}/>
         </Route>

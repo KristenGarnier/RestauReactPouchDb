@@ -8,7 +8,7 @@ class Restaurants extends Component {
         super(props);
         this.state = {
             restaurants: [],
-            state: []
+            state: this.props.store.getState()['restaurant'] || {}
         };
 
         props.restaurantsDb.allDocs({include_docs: true})
@@ -19,6 +19,8 @@ class Restaurants extends Component {
             });
 
         this.handleClick = this.handleClick.bind(this);
+
+        this.push = this.props.history.push;
     }
 
     componentWillMount() {
@@ -37,7 +39,7 @@ class Restaurants extends Component {
     render() {
         console.log(this.state.state);
         const restaurants = this.state.restaurants.map(doc => {
-            return <ListElem click={this.handleClick} key={doc.doc._id} restaurant={doc.doc}/>;
+            return <ListElem click={this.handleClick} selected={this.state.state} key={doc.doc._id} element={doc.doc}/>;
         });
         return (<div>
             <ul>
@@ -48,6 +50,7 @@ class Restaurants extends Component {
 
     handleClick(restaurant) {
         this.props.store.dispatch(instantiateRestaurant(restaurant));
+        this.push('/resume/product');
     }
 }
 
