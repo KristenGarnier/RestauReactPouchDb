@@ -10,17 +10,21 @@ import Principal from './js/components/principal';
 import Drink from './js/components/drinks';
 import Supp from './js/components/supplements';
 import Checkout from './js/components/checkout';
+import Commands from './js/components/commandsList';
+import Single from './js/components/singleCommand';
 
 const routes = (
     <Router history={browserHistory}>
         <Route path="/" component={Home}>
             <IndexRoute component={Login}/>
             <Route path="resume" name="resume" component={Resume}>
-                <IndexRoute component={Restaurants}/>
+                <IndexRoute component={Commands}/>
+                <Route path="restaurant" name="restaurant" component={Restaurants}/>
                 <Route path="product" name="product" component={Principal}/>
                 <Route path="drink" name="drink" component={Drink}/>
                 <Route path="supplement" name="supplement" component={Supp}/>
                 <Route path="checkout" name="checkout" component={Checkout}/>
+                <Route path="command/:id" name="singleCommand" component={Single}/>
             </Route>
             <Route path="register" name="register" component={Register}/>
         </Route>

@@ -54,7 +54,7 @@ class Supplements extends Component {
             drink = store['drink'];
 
         if (restaurant === undefined || null) {
-            this.push('/resume');
+            this.push('/resume/restaurant');
         }
         else if (principal === undefined || null) {
             this.push('/resume/product');

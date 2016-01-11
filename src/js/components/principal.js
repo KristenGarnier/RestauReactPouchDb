@@ -50,7 +50,7 @@ class Principal extends Component {
     componentDidMount() {
         const restaurant = this.props.store.getState()['restaurant'];
         if (restaurant === undefined || null) {
-            this.push('/resume');
+            this.push('/resume/restaurant');
         }
     }
 

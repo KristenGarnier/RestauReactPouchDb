@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {reset, deleteSupplement} from '../actions';
 import TableRow from './tableRow';
 import uuid from 'node-uuid';
+import moment from 'moment';
 
 class Checkout extends Component {
     constructor(props) {
@@ -95,10 +96,12 @@ class Checkout extends Component {
         const command = {
             _id: uuid.v1(),
             user: this.props.user,
-            date: new Date(),
+            date: moment().format('D-MM-Y'),
             price: total,
-            elems: this.state
+            elems: this.state,
+            restaurant: this.props.store.getState()['restaurant']
         };
+        console.log(this.props.user);
         this.props.localDb.put(command)
             .then(_ => {
 

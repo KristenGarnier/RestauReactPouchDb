@@ -74,6 +74,8 @@
     "invariant": "^2.1.1",
     "json-stable-stringify": "^1.0.0",
     "map-stream": "0.0.6",
+    "moment": "^2.11.1",
+    "moment-timezone": "^0.5.0",
     "node-uuid": "^1.4.7",
     "object-pick": "^0.1.1",
     "pouchdb": "^5.1.0",

@@ -52,7 +52,7 @@ class Drinks extends Component {
             principal = store['principal'];
 
         if (restaurant === undefined || null) {
-            this.push('/resume');
+            this.push('/resume/restaurant');
         }
         else if (principal === undefined || null) {
             this.push('/resume/product');

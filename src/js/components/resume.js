@@ -28,6 +28,7 @@ class Resume extends Component {
                 this.setState({
                     user: res
                 });
+                this.user = res;
             })
             .catch(err => {
                 console.error(err);
@@ -75,7 +76,8 @@ class Resume extends Component {
                             store: this.props.store,
                             localDb: this.localDb,
                             restaurantsDb: this.props.restaurantsDb,
-                            productsDb: this.props.productsDb
+                            productsDb: this.props.productsDb,
+                            user: this.user
                         })}
                     </div>
 
@@ -109,8 +111,12 @@ class Resume extends Component {
     menu() {
         const nb = this.nbOfElements(this.state.state);
 
-        const restaurant = <div className="menu-elem" onClick={() => this.handleRedirect('/resume')}>
+        const restaurant = <div className="menu-elem" onClick={() => this.handleRedirect('/resume/restaurant')}>
             <p> Restaurants </p>
+        </div>;
+
+        const commands = <div className="menu-elem" onClick={() => this.handleRedirect('/resume')}>
+            <p> Commandes </p>
         </div>;
         const panier = <div className="menu-elem" onClick={() => this.handleRedirect('/resume/checkout')}>
             <p> Panier  { nb > 0  ? <span className="total">{nb}</span> : '' }</p>
@@ -127,6 +133,8 @@ class Resume extends Component {
         const hr = <hr style={{margin: '0'}}/>;
         if (this.state.state['restaurant'] === undefined || null) {
             return <div className="columns two">
+                {commands}
+                {hr}
                 {restaurant}
                 {hr}
                 {panier}
@@ -134,6 +142,8 @@ class Resume extends Component {
         }
         else if (this.state.state['principal'] === undefined || null) {
             return <div className="columns two">
+                {commands}
+                {hr}
                 {restaurant}
                 {hr}
                 {produit}
@@ -143,6 +153,8 @@ class Resume extends Component {
         }
         else if (this.state.state['drink'] === undefined || null) {
             return <div className="columns two">
+                {commands}
+                {hr}
                 {restaurant}
                 {hr}
                 {produit}
@@ -153,6 +165,8 @@ class Resume extends Component {
             </div>
         } else if (this.state.state['supplements'] === undefined || null) {
             return <div className="columns two">
+                {commands}
+                {hr}
                 {restaurant}
                 {hr}
                 {produit}
@@ -166,6 +180,8 @@ class Resume extends Component {
         }
 
         return <div className="columns two">
+            {commands}
+            {hr}
             {restaurant}
             {hr}
             {produit}
