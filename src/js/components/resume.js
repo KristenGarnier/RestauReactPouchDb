@@ -9,7 +9,8 @@ class Resume extends Component {
 
         console.log(Circular.parse(localStorage.getItem('user')));
         this.state = {
-            text: Circular.parse(localStorage.getItem('user')).name
+            text: Circular.parse(localStorage.getItem('user')).name,
+            user: {}
         };
 
         this.handleLogout = this.handleLogout.bind(this);
@@ -17,6 +18,16 @@ class Resume extends Component {
 
         this.db = props.db;
         this.localDb = props.localDb;
+        this.db.getUser(this.state.text)
+            .then(res => {
+                console.log(res);
+                this.setState({
+                    user:res
+                });
+            })
+        .catch( err => {
+            console.error(err);
+        })
     }
 
     render() {
@@ -27,7 +38,13 @@ class Resume extends Component {
                         <h2 className="title">Manger</h2>
                     </div>
                     <div className="four columns">
-                        <p className="user">Utilisateur : {this.state.text}</p>
+                        <div className="user-bubble">
+                            <img
+                                src={this.state.user.photo}
+                                alt="User avatar" width="50"/>
+                            <p className="user">{this.state.text}</p>
+                        </div>
+
                     </div>
                     <div className="four columns">
                         <button className="logout" onClick={this.handleLogout}>Logout</button>

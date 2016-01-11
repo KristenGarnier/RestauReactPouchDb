@@ -61,7 +61,11 @@ class Register extends Component {
         const legit = this.userLegit(config.authorized, this.state.login);
         console.log(legit);
         if (legit.length !== 0) {
-            this.db.signup(this.state.login, this.state.password)
+            this.db.signup(this.state.login, this.state.password, {
+                    metadata : {
+                        photo : 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'
+                    }
+            })
                 .then(res => {
                     console.log('User registered');
                     return this.db.login(this.state.login, this.state.password);

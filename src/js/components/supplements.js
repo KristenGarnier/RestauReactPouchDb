@@ -76,7 +76,7 @@ class Supplements extends Component {
             <div className="row">
                 {produits}
             </div>
-            <button className="button-primary" onClick={this.handleConfirm}>Confirmer les suppléments</button>
+            <button className="button-primary confirm" onClick={this.handleConfirm}>Confirmer les suppléments</button>
         </div>);
     }
 
