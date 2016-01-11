@@ -31,12 +31,12 @@ class Login extends Component {
                 <h2>Connectez vous</h2>
                 <div className="row">
                     <div className="six columns">
-                        <label for="exampleEmailInput">Email</label>
+                        <label htmlFor="exampleEmailInput">Email</label>
                         <input onChange={this.handleLoginChange} value={this.state.login} className="u-full-width"
                                type="text" placeholder="email@domain.fr" id="exampleEmailInput"/>
                     </div>
                     <div className="six columns">
-                        <label for="password">Mot de passe</label>
+                        <label htmlFor="password">Mot de passe</label>
                         <input className="u-full-width" onChange={this.handlePasswordChange} value={this.state.password}
                                type="password" placeholder="Mot de passe" id="password" required/>
                     </div>

@@ -30,7 +30,7 @@ export default ({element, click, selected, del}) => {
     } else {
         color = selected.name === element.name ? elem : '';
     }
-    return <article className='card four columns'>
+    return <article className='card three columns'>
         <header className="card__thumb">
             <a onClick={() => click(element)}>
                 <img src={element.img}/>

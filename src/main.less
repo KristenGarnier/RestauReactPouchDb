@@ -57,14 +57,57 @@ textarea {
 
   p.user{
     text-align: center;
+    text-transform: capitalize;
+    cursor: pointer;
   }
 
   .user-bubble {
+
     margin-top: 1.5rem;
     img{
+      cursor: pointer;
       border-radius: 500px;
       display: block;
       margin: auto;
+    }
+  }
+
+  .menu-elem{
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    p{
+      text-align: center;
+      margin: 0;
+      padding: 2rem 0 2rem 0;
+      .total {
+        color: white;
+        font-weight: bold;
+        background: @primary;
+        font-size: 0.7em;
+        padding: 0.5rem 0.7rem;
+        border-radius: 500px;
+        transition: all 0.2s ease-in-out;
+        margin-left: 1rem;
+      }
+    }
+    .divider{
+      margin-top: 0;
+      margin-bottom:0;
+      border-width: 0;
+      border-top: 1px solid #E1E1E1;
+    }
+
+    &.active {
+      background: @primary;
+      color: white;
+    }
+    &:hover{
+      background: @primary;
+      color: white;
+      .total {
+        color: @primary;
+        background: white;
+      }
     }
   }
 

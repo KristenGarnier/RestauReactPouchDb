@@ -9,17 +9,21 @@ const uuid = require('node-uuid');
 PouchDB.plugin(PouchAuth);
 PouchDB.plugin(PouchFind);
 
+window.PouchDB = PouchDB;
+
 
 const pouchOpts = {
     skipSetup: true
 };
 
 const db = new PouchDB(config.remoteDb, pouchOpts),
-    localDb = new PouchDB('todos'),
+    localDb = new PouchDB('comm'),
     productsDb = new PouchDB('products'),
     restaurantsDb = new PouchDB('restaurants'),
     remoteRestaurant = new PouchDB('http://localhost:5984/restaurants'),
     remoteProducts = new PouchDB('http://localhost:5984/products');
+
+console.log(db.allDocs().then(res => console.log(res)));
 
 remoteProducts.sync(productsDb, {
     live: true,
@@ -30,7 +34,7 @@ remoteRestaurant.sync(restaurantsDb, {
     retry: true
 });
 
-const SyncHandler = localDb.sync(db, {
+const SyncHandler = db.sync(localDb, {
     live: true,
     retry: true
 });

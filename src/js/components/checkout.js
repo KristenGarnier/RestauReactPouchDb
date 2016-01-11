@@ -1,18 +1,18 @@
 import React, {Component} from 'react';
 import {reset, deleteSupplement} from '../actions';
 import TableRow from './tableRow';
+import uuid from 'node-uuid';
 
 class Checkout extends Component {
     constructor(props) {
         super(props);
 
-        this.componentDidMount = this.componentDidMount.bind(this);
         this.handleCheckout = this.handleCheckout.bind(this);
         this.handleAction = this.handleAction.bind(this);
 
         const store = this.props.store.getState();
         this.state = {
-            principal: store['principal'] || {},
+            principal: store['principal'] || {},
             drink: store['drink'] || {},
             supplements: store['supplements'] || []
         };
@@ -33,24 +33,6 @@ class Checkout extends Component {
         });
     }
 
-    componentDidMount() {
-        const store = this.props.store.getState(),
-            restaurant = store['restaurant'],
-            principal = store['principal'],
-            supplements = store['supplements'],
-            drink = store['drink'];
-
-        if (restaurant === undefined || null) {
-            this.push('/resume');
-        }
-        else if (principal === undefined || null) {
-            this.push('/resume/product');
-        }
-        else if (drink === undefined || null) {
-            this.push('/resume/drink');
-        }
-    }
-
     componentWillUnmount() {
         this.unsubscibe();
     }
@@ -59,7 +41,7 @@ class Checkout extends Component {
         let total = this.state.principal.price + this.state.drink.price;
         const supplements = this.state.supplements.map((supp, i) => {
             total += supp.price;
-            return <TableRow element={supp} key={i} click={this.handleAction} />;
+            return <TableRow element={supp} key={i} click={this.handleAction}/>;
         });
 
         return <div>
@@ -73,35 +55,63 @@ class Checkout extends Component {
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>{this.state.principal.name}</td>
-                    <td>Element Principal</td>
-                    <td>{this.state.principal.price}</td>
-                    <td><button onClick={() => this.handleAction('MODIFY_PRINCIPAL')}>Modifer</button></td>
-                </tr>
-                <tr>
-                    <td>{this.state.drink.name}</td>
-                    <td>Boisson</td>
-                    <td>{this.state.drink.price}</td>
-                    <td><button onClick={() => this.handleAction('MODIFY_DRINK')}>Modifier</button></td>
-                </tr>
+                { this.state.principal.name !== undefined ?
+                    <tr>
+                        <td>{this.state.principal.name}</td>
+                        <td>Element Principal</td>
+                        <td>{this.state.principal.price}</td>
+                        <td>
+                            <button onClick={() => this.handleAction('MODIFY_PRINCIPAL')}>Modifer</button>
+                        </td>
+                    </tr>
+                    : ''}
+                { this.state.drink.name !== undefined ?
+                    <tr>
+                        <td>{this.state.drink.name}</td>
+                        <td>Boisson</td>
+                        <td>{this.state.drink.price}</td>
+                        <td>
+                            <button onClick={() => this.handleAction('MODIFY_DRINK')}>Modifier</button>
+                        </td>
+                    </tr>
+                    : ''}
                 {supplements}
                 </tbody>
             </table>
-            <div>
-                <h3>TOTAL : {total} €</h3>
-                <button className="button-primary" onClick={this.handleCheckout}>Commander</button>
-            </div>
+            { !isNaN(total) ?
+                <div>
+                    <h3>TOTAL : {total} €</h3>
+                    <button className="button-primary" onClick={() => this.handleCheckout(total)}>Commander</button>
+
+                </div>
+                :
+                <div>
+                    <h3>Les articles choisis apparaitrons ici</h3>
+                </div>}
         </div>;
     }
 
-    handleCheckout(){
+    handleCheckout(total) {
+        const command = {
+            _id: uuid.v1(),
+            user: this.props.user,
+            date: new Date(),
+            price: total,
+            elems: this.state
+        };
+        this.props.localDb.put(command)
+            .then(_ => {
+
+            })
+            .catch(err => {
+                console.error(err);
+            });
         this.props.history.push('/');
         this.props.store.dispatch(reset());
     }
 
-    handleAction(action, supplement){
-        switch(action){
+    handleAction(action, supplement) {
+        switch (action) {
             case 'DELETE':
                 this.props.store.dispatch(deleteSupplement(supplement));
                 break;
