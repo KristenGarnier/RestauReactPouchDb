@@ -52,7 +52,14 @@ class Home extends Component {
     render() {
         return (
             <div>
-                {React.cloneElement(this.props.children, { store: store, db: db, localDb: localDb, productsDb: productsDb, restaurantsDb: restaurantsDb })}
+                {React.cloneElement(this.props.children, {
+                    store: store,
+                    db: db,
+                    localDb: localDb,
+                    productsDb: productsDb,
+                    restaurantsDb: restaurantsDb,
+                    SyncHandler: SyncHandler
+                })}
             </div>
         );
     }

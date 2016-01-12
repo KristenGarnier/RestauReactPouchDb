@@ -9,6 +9,29 @@ class Commands extends Component {
             commands: []
         };
 
+        this.props.SyncHandler.on('change', info => {
+            console.log('change appears');
+
+            this.props.localDb.createIndex({
+                    index: {fields: ['date']}
+                })
+                .then(_ => {
+                    return this.props.localDb.find({
+                        selector: {
+                            date: moment().format('D-MM-Y')
+                        }
+                    });
+                })
+                .then(res => {
+                    this.setState({
+                        commands: res.docs
+                    });
+                })
+                .catch(err => {
+                    console.error(err);
+                });
+        });
+
         this.props.localDb.createIndex({
                 index: {fields: ['date']}
             })

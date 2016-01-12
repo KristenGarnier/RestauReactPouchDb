@@ -77,7 +77,8 @@ class Resume extends Component {
                             localDb: this.localDb,
                             restaurantsDb: this.props.restaurantsDb,
                             productsDb: this.props.productsDb,
-                            user: this.user
+                            user: this.user,
+                            SyncHandler: this.props.SyncHandler
                         })}
                     </div>
 

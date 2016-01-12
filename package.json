@@ -78,7 +78,7 @@
     "moment-timezone": "^0.5.0",
     "node-uuid": "^1.4.7",
     "object-pick": "^0.1.1",
-    "pouchdb": "^5.1.0",
+    "pouchdb": "5.0.0",
     "pouchdb-authentication": "^0.4.2",
     "pouchdb-find": "^0.8.0",
     "react": "^0.14.0",
