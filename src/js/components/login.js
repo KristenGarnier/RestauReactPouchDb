@@ -64,7 +64,7 @@ class Login extends Component {
                     login: '',
                     password: ''
                 });
-
+                console.log('hello');
                 return this.db.getSession()
             })
             .then(res => {

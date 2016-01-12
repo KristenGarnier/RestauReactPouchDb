@@ -47,6 +47,7 @@ class Commands extends Component {
         });
         return (<div>
             <button className="button-primary" onClick={() => this.props.history.push('/resume/restaurant')}>Passer commande</button>
+            <button className="button-primary u-pull-right" style={{marginRight: "4rem"}} onClick={() => this.props.history.push('/resume/call')}>Je commande pour tout le monde</button>
             <h4>Commandes d'aujourd'hui</h4>
             <table className="u-full-width">
                 <thead>

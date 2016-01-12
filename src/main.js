@@ -33,23 +33,3 @@ const routes = (
 
 
 ReactDOM.render( routes , document.getElementById('react-app'));
-
-/**handleAdd() {
-        if (localStorage.getItem('user') !== null) {
-            let todo = {
-                _id: uuid.v4(),
-                title: 'afterward',
-                completed: false
-            };
-            localDb.put(todo)
-                .then(() => {
-                    console.log('added !');
-                })
-                .catch(err => {
-                    console.log(err);
-                });
-        } else {
-            throw 'You are not connected'
-        }
-
-    }*/

@@ -20,8 +20,8 @@ const db = new PouchDB(config.remoteDb, pouchOpts),
     localDb = new PouchDB('comm'),
     productsDb = new PouchDB('products'),
     restaurantsDb = new PouchDB('restaurants'),
-    remoteRestaurant = new PouchDB('http://localhost:5984/restaurants'),
-    remoteProducts = new PouchDB('http://localhost:5984/products');
+    remoteRestaurant = new PouchDB(config.remoteRestaurants),
+    remoteProducts = new PouchDB(config.remoteProducts);
 
 
 remoteProducts.sync(productsDb, {
