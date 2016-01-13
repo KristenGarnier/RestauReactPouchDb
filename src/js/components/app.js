@@ -8,6 +8,7 @@ import Login from './login';
 const uuid = require('node-uuid');
 PouchDB.plugin(PouchAuth);
 PouchDB.plugin(PouchFind);
+PouchDB.debug.enable('*');
 
 window.PouchDB = PouchDB;
 
