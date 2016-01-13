@@ -1,8 +1,12 @@
-# Grouped command to fastfood
+# Grouped order to fastfood
 
-This apps allow people form my school to pass command to fastfood all at once
+This apps allow people form my school to order to fastfood all at once
 
-Created with react and pouchDb
+Created with react, pouchDb and a bit of redux
+
+## Feature
+
+Real time update while students are making order ( Put two browser alongside, order from one, and see the other one update ( if you are on the order section ) )
 
 ## Happiness is 3 lines away
 
