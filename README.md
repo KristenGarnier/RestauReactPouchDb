@@ -7,6 +7,7 @@ Created with react, pouchDb and a bit of redux
 ## Feature
 
 Real time update while students are making order ( Put two browser alongside, order from one, and see the other one update ( if you are on the order section ) )
+It also persistate your command to your localstorage if you want to come back later
 
 ## Happiness is 3 lines away
 
