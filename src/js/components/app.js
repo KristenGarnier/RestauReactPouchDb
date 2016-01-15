@@ -9,6 +9,7 @@ const uuid = require('node-uuid');
 PouchDB.plugin(PouchAuth);
 PouchDB.plugin(PouchFind);
 window.PouchDB = PouchDB;
+PouchDB.debug.disable();
 
 
 const pouchOpts = {

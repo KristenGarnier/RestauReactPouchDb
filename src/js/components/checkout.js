@@ -105,7 +105,7 @@ class Checkout extends Component {
             elems: this.state,
             restaurant: this.props.store.getState()['restaurant']
         };
-        console.log(this.props.user);
+        console.log(command);
         this.props.localDb.put(command)
             .then(_ => {
 

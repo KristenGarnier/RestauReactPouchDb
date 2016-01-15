@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {countElems} from '../utilis';
 
 class SingleCommand extends Component {
     constructor(props) {
@@ -39,11 +40,12 @@ class SingleCommand extends Component {
     }
 
     render() {
-        const elems = this.state.supplements.map((supp, i) => {
+        const elems = countElems(this.state.supplements).map((supp, i) => {
             return <tr key={i}>
                 <td>{supp.name}</td>
                 <td>Supplément</td>
-                <td>{supp.price}</td>
+                <td>{supp.price * supp.count} € | Prix unitaire : {supp.price} €</td>
+                <td>{supp.count}</td>
             </tr>;
         });
         return (<div>
@@ -55,8 +57,9 @@ class SingleCommand extends Component {
                 <thead>
                 <tr>
                     <th>Produit</th>
-                    <th>type</th>
-                    <th>prix</th>
+                    <th>Type</th>
+                    <th>Prix</th>
+                    <th>Quantité</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -64,11 +67,13 @@ class SingleCommand extends Component {
                     <td>{this.state.principal.name}</td>
                     <td>Element Principal</td>
                     <td>{this.state.principal.price}</td>
+                    <td>1</td>
                 </tr>
                 <tr>
                     <td>{this.state.drink.name}</td>
                     <td>Boisson</td>
                     <td>{this.state.drink.price}</td>
+                    <td>1</td>
                 </tr>
                 {elems}
                 </tbody>

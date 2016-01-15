@@ -34,6 +34,11 @@ class Call extends Component {
     }
 
     render() {
+        let total = 0;
+        this.state.commands.forEach(com => {
+            total += com.price;
+        });
+
         const f = _.compose(countElems, getElems);
         console.log(f(this.state.commands, 'supplements'));
         const sup = f(this.state.commands, 'supplements').map((el, i) => {
@@ -60,6 +65,7 @@ class Call extends Component {
             <div>
                 <button onClick={this.handleClick} className="button-primary">Retour aux commandes</button>
                 <h2>Produits principaux</h2>
+                { total > 0 ? <h5 className="u-pull-right" style={{marginRight: '4rem'}}>Total : {total} €</h5> : '' }
                 <table className="u-full-width">
                     <thead>
                     <tr>

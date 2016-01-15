@@ -53,7 +53,9 @@ class Commands extends Component {
     }
 
     render() {
+        let total = 0;
         const commands = this.state.commands.map((command, i) => {
+            total += command.price;
             return <tr key={i}>
                 <td width="55">
                     <img className="avatar" src={command.user.photo} alt="Avatar on an user" width="50"/>
@@ -72,6 +74,7 @@ class Commands extends Component {
             <button className="button-primary" onClick={() => this.props.history.push('/resume/restaurant')}>Passer commande</button>
             <button className="button-primary u-pull-right" style={{marginRight: "4rem"}} onClick={() => this.props.history.push('/resume/call')}>Je commande pour tout le monde</button>
             <h4>Commandes d'aujourd'hui</h4>
+            { total > 0 ? <h5 className="u-pull-right" style={{marginRight: '4rem'}}>Total : {total} €</h5> : '' }
             <table className="u-full-width">
                 <thead>
                 <tr>

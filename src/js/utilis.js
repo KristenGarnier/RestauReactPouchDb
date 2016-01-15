@@ -16,13 +16,10 @@ export function countElems(supplemements) {
                 return e;
             });
         } else {
-            const newObj = {
-                id: element._id.toString(),
-                name: element.name,
-                price: element.price,
-                type: element.type,
-                count: 1
-            };
+            const newObj = Object.assign(element, {
+                    id: element._id.toString(),
+                    count: 1
+                });
 
             return [
                 ...container,
