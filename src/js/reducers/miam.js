@@ -24,11 +24,11 @@ export default (_ = [], action) => {
             let count = 0;
             state.supplements = state.supplements.filter(supplement => {
                 if(count === 0){
-                    if(supplement._id !== action.supplement._id){
+                    if(supplement._id !== action.supplement.id){
                         return true;
                     }else {
                         count ++;
-                        return false
+                        return false;
                     }
                 } else {
                     return true

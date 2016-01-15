@@ -3,6 +3,7 @@ import {reset, deleteSupplement} from '../actions';
 import TableRow from './tableRow';
 import uuid from 'node-uuid';
 import moment from 'moment';
+import {countElems} from '../utilis';
 
 class Checkout extends Component {
     constructor(props) {
@@ -40,7 +41,7 @@ class Checkout extends Component {
 
     render() {
         let total = this.state.principal.price + this.state.drink.price;
-        const supplements = this.state.supplements.map((supp, i) => {
+        const supplements = countElems(this.state.supplements).map((supp, i) => {
             total += supp.price;
             return <TableRow element={supp} key={i} click={this.handleAction}/>;
         });
@@ -52,6 +53,7 @@ class Checkout extends Component {
                     <th>Produit</th>
                     <th>type</th>
                     <th>prix</th>
+                    <th>Quantité</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -61,6 +63,7 @@ class Checkout extends Component {
                         <td>{this.state.principal.name}</td>
                         <td>Element Principal</td>
                         <td>{this.state.principal.price}</td>
+                        <td>1</td>
                         <td>
                             <button onClick={() => this.handleAction('MODIFY_PRINCIPAL')}>Modifer</button>
                         </td>
@@ -71,6 +74,7 @@ class Checkout extends Component {
                         <td>{this.state.drink.name}</td>
                         <td>Boisson</td>
                         <td>{this.state.drink.price}</td>
+                        <td>1</td>
                         <td>
                             <button onClick={() => this.handleAction('MODIFY_DRINK')}>Modifier</button>
                         </td>

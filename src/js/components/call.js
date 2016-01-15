@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
 import moment from 'moment';
 import _ from 'ramda';
+import {countElems, getElems} from '../utilis';
 
 class Call extends Component {
     constructor(props) {
         super(props);
+
+        this.handleClick = this.handleClick.bind(this);
 
         this.state = {
             commands: []
@@ -31,8 +34,8 @@ class Call extends Component {
     }
 
     render() {
-        const f = _.compose(this.countElems, this.getElems);
-
+        const f = _.compose(countElems, getElems);
+        console.log(f(this.state.commands, 'supplements'));
         const sup = f(this.state.commands, 'supplements').map((el, i) => {
             return <tr key={i}>
                 <td>{el.name}</td>
@@ -55,6 +58,7 @@ class Call extends Component {
 
         return (
             <div>
+                <button onClick={this.handleClick} className="button-primary">Retour aux commandes</button>
                 <h2>Produits principaux</h2>
                 <table className="u-full-width">
                     <thead>
@@ -97,41 +101,8 @@ class Call extends Component {
         );
     }
 
-    countElems(supplemements) {
-        return _.flatten(supplemements).reduce((container, element) => {
-
-            const temp = container.filter(e => {
-                console.log(e.id, element._id.toString());
-                return e.id === element._id.toString();
-            });
-
-            if (temp.length > 0) {
-                return container.map(e => {
-                    if (e.id === element._id.toString()) {
-                        return Object.assign(e, {
-                            count: e.count + 1
-                        });
-                    }
-                    return e;
-                });
-            } else {
-                const newObj = {
-                    id: element._id.toString(),
-                    name: element.name,
-                    count: 1
-                };
-
-                return [
-                    ...container,
-                    newObj];
-            }
-        }, []);
-    }
-
-    getElems(state, cat){
-        return state.map(elem => {
-            return elem.elems[cat];
-        });
+    handleClick(){
+        this.props.history.goBack();
     }
 }
 
