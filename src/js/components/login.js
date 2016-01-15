@@ -26,9 +26,11 @@ class Login extends Component {
     }
 
     render() {
+        const {error} = this.state;
         return (
             <div className="container form-connect">
                 <h2>Connectez vous</h2>
+                { error ? <p style={{padding: '1rem', textAlign: 'center', border: '2px solid #e74c3c', borderRadius: '5px', color: '#e74c3c'}}> {error} </p> : '' }
                 <div className="row">
                     <div className="six columns">
                         <label htmlFor="exampleEmailInput">Email</label>
@@ -74,6 +76,9 @@ class Login extends Component {
             })
             .catch(error => {
                 console.error(error);
+                this.setState({
+                    error: error.message
+                });
             });
 
     }
