@@ -42,7 +42,7 @@ class Checkout extends Component {
     render() {
         let total = this.state.principal.price + this.state.drink.price;
         const supplements = countElems(this.state.supplements).map((supp, i) => {
-            total += supp.price;
+            total += supp.price * supp.count;
             return <TableRow element={supp} key={i} click={this.handleAction}/>;
         });
 
