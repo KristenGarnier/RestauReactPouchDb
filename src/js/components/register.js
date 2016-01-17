@@ -22,14 +22,11 @@ class Register extends Component {
     }
 
     render() {
+        const error = this.state.error;
         return (
             <div className="container form-connect">
-                <div>
-                    <p style={{
-                    color: 'red'
-                    }}>{this.state.error.name}</p>
-                </div>
                 <h2>Inscription</h2>
+                { error ? <p style={{padding: '1rem', textAlign: 'center', border: '2px solid #e74c3c', borderRadius: '5px', color: '#e74c3c'}}> {error} </p> : '' }
                 <div className="row">
                     <div className="six columns">
                         <label htmlFor="exampleEmailInput">Email</label>
@@ -80,12 +77,17 @@ class Register extends Component {
                     this.history.push('/resume');
                 })
                 .catch(error => {
-                    this.setState({
-                        error: error
-                    });
+                    if(error.status === 409) {
+                        this.setState({
+                            error: 'Le nom d\'utilisateur est déjà pris'
+                        });
+                    } else {
+                        this.setState({
+                            error: error.message
+                        });
+                    }
                 });
         } else {
-            console.log('ERRR');
             this.setState({
                 error: {
                     name: 'Vous devez être étudiant en licence MMI au puy en velay pour pouvoir vous inscrire'

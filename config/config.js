@@ -10,6 +10,7 @@ module.exports = {
       'phillipe.serny@etu.udamail.fr',
       'karine.perez@etu.udamail.fr',
       'juliette.vialaneix@etu.udamail.fr',
-      'nicolas.liveris@etu.udamail.fr'
+      'nicolas.liveris@etu.udamail.fr',
+      'faouzi.jaziri@udamail.fr'
   ]
 };

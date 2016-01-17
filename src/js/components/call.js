@@ -43,20 +43,20 @@ class Call extends Component {
         console.log(f(this.state.commands, 'supplements'));
         const sup = f(this.state.commands, 'supplements').map((el, i) => {
             return <tr key={i}>
-                <td>{el.name}</td>
+                <td  width="80%">{el.name}</td>
                 <td>{el.count}</td>
             </tr>
         });
         const boissons = f(this.state.commands, 'drink').map((el, i) => {
             return <tr key={i}>
-                <td>{el.name}</td>
+                <td  width="80%">{el.name}</td>
                 <td>{el.count}</td>
             </tr>
         });
 
         const mains = f(this.state.commands, 'principal').map((el, i) => {
             return <tr key={i}>
-                <td>{el.name}</td>
+                <td  width="80%">{el.name}</td>
                 <td>{el.count}</td>
             </tr>
         });

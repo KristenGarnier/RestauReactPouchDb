@@ -52,7 +52,7 @@ class Resume extends Component {
             <div>
                 <div className="row">
                     <div className="four columns">
-                        <h2 className="title">Manger</h2>
+                        <h2 className="title">GroupLunch</h2>
                     </div>
                     <div className="four columns">
                         <div className="user-bubble" onClick={this.handleClickUser}>
@@ -101,7 +101,7 @@ class Resume extends Component {
     }
 
     handleClickUser() {
-        alert('YOU CLICKED BATMAN U BATSTARD');
+        alert('USER PROFILE NOT IMPLEMENTED YET');
     }
 
     handleRedirect(redirect) {
